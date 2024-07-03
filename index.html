@@ -20,11 +20,37 @@
         <h1 class="title is-2 pb-6 has-text-centered">Weather Dashboard</h1>
     </header>
 
-    <main class="grid">
-        <section class="cell">search bar</section>
-        <section class="cell is-col-span-2">current forecast</section>
-        <section class="cell">search history</section>
-        <section class="cell is-col-span-2">5-day forecast</section>
+    <main class="fixed-grid">
+        <div class="grid has-2-cols">
+
+            <!-- Seach Bar -->
+            <section class="cell p">
+                <form id="location-search">
+                    <input class="input is-normal input is-rounded" type="text" id="search-input"
+                        placeholder="city name">
+                    <div class="buttons mt-3">
+                        <button id="searchButton" type="submit" class="button is-primary is-rounded">Search</button>
+                    </div>
+                </form>
+
+                <div id="search-results"></div>
+            </section>
+
+            <!-- Search History -->
+            <section class="cell is-col-from-end">
+                current forecast
+            </section>
+
+            <!-- Current Forecast -->
+            <section class="cell">
+                search history
+            </section>
+
+            <!-- 5-Day Forecast -->
+            <section class="cell is-col-from-end">
+                5-day forecast
+            </section>
+        </div>
     </main>
 
 
