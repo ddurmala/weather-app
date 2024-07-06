@@ -7,6 +7,11 @@
 
     <title>Weather App</title>
 
+    <!-- Font - Header - "Jura" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap" rel="stylesheet">
+
     <!-- link to bulma framework -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
     <!-- Links to CSS -->
@@ -14,46 +19,54 @@
 
 </head>
 
-<body class="">
+<body>
 
     <header>
-        <h1 class="title is-2 pb-6 has-text-centered">Weather Dashboard</h1>
+        <h1 class="title is-2 p-6 mb-6 has-text-centered">Weather Dashboard</h1>
     </header>
 
-    <main class="fixed-grid">
-        <div class="grid has-2-cols">
 
-            <!-- Seach Bar -->
-            <section class="cell p">
-                <form id="location-search">
-                    <input class="input is-normal input is-rounded" type="text" id="search-input"
-                        placeholder="city name">
-                    <div class="buttons mt-3">
-                        <button id="searchButton" type="submit" class="button is-primary is-rounded">Search</button>
+
+    <main class="mx-6 p-4">
+
+        <div class="fixed-grid has-5-cols">
+            <div class="grid">
+                <section class="cell is-col-span-2 mr-3">
+                    <!-- Seach Bar -->
+                    <form id="location-search">
+                        <input id="city-input" class="input is-normal input is-rounded" type="text"
+                            placeholder="city name">
+                        <div class="buttons mt-3">
+                            <button id="searchButton" type="submit" class="button is-primary is-rounded">Search</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <!-- Search History -->
+                    <div id="history-list">
+                        <h6 class="title is-6">Search History</h6>
+                        <ul id="search-history"></ul>
                     </div>
-                </form>
+                </section>
 
-                <div id="search-results"></div>
-            </section>
-
-            <!-- Search History -->
-            <section class="cell is-col-from-end">
-                current forecast
-            </section>
-
-            <!-- Current Forecast -->
-            <section class="cell">
-                search history
-            </section>
-
+                <!-- Current Forecast -->
+                <section class="cell is-col-span-3 ml-6 has-text-centered">
+                    <!-- <h4 class="title is-4">current forecast</h4> -->
+                    <p id="temp-output"></p>
+                </section>
+            </div>
+        </div>
+        <div>
             <!-- 5-Day Forecast -->
-            <section class="cell is-col-from-end">
-                5-day forecast
+            <section>
+                <h4 class="title is-4">5 Day Forecast</h4>
             </section>
         </div>
     </main>
 
 
+    <!-- ADD JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Link to JavaScript -->
     <script src="./assets/script.js"></script>

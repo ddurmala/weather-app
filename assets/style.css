@@ -3,15 +3,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Jura", sans-serif;
     color: #444;
 }
 
 html,
 body {
     height: 100%;
-    margin: 5%;
+    /* margin: 5%; */
 }
+
 
 img {
     max-width: 100%;
@@ -30,4 +31,17 @@ button {
 /* GLOBAL/REUSABLE CLASSES */
 .text-center {
     text-align: center;
+}
+
+/* Custom Styles */
+header {
+    background-image: url('./images/clouds-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+body {
+    background-color: rgb(248, 252, 255);
 }
