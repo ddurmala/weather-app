@@ -25,7 +25,11 @@ a {
 
 button {
     border: none;
+    margin: 10px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
 }
 
 /* GLOBAL/REUSABLE CLASSES */
