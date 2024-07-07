@@ -21,9 +21,6 @@ function outputWeather(event) {
 
     event.preventDefault();
 
-    // just to make sure everything is working properly in this function
-    console.log('outputWeather function is triggered');
-
     const cityInput = document.querySelector('#city-input');
 
     const searchText = cityInput.value;
@@ -42,8 +39,6 @@ function outputWeather(event) {
             return responseObj.json();
         })
         .then(function (data) {
-            // to see the data object in console
-            console.log(data);
 
             const coord = data.coord;
 
@@ -82,11 +77,16 @@ function outputWeather(event) {
 
             // loop through each city input add to list and given a class of "history"
             searchHistory.forEach((searchItem) => {
-                const listItem = document.createElement('li');
+                const listItem = document.createElement('button');
                 listItem.classList.add('history');
                 listItem.textContent = searchItem;
                 historyList.appendChild(listItem);
-            })
+
+                listItem.addEventListener('click', function () {
+                    const cityInput = document.querySelector('#city-input');
+                    cityInput.value = this.textContent;
+                });
+            });
 
             cityInput.value = '';
 
@@ -112,13 +112,10 @@ function getForecast(lat, lon) {
         })
 
         .then(function (data) {
-            console.log(data);
 
             const filtered = data.list.filter(function (weatherObj) {
                 return weatherObj.dt_txt.includes('12:00:00');
             });
-
-            console.log(filtered);
 
             const outputDiv = document.querySelector('#forecast');
 
@@ -127,11 +124,9 @@ function getForecast(lat, lon) {
             filtered.forEach(weatherObj => {
                 const dateTimeString = weatherObj.dt_txt;
                 const dateOnly = dateTimeString.substring(5, 10);
-                console.log(dateOnly);
 
                 const date = dayjs(weatherObj.dt_txt);
                 const dayOfWeek = date.format('dddd');
-                console.log(dayOfWeek);
 
                 const html = `<div class="cell">
         <p class="has-text-centered">${dayOfWeek}</p>
@@ -143,7 +138,6 @@ function getForecast(lat, lon) {
         <hr>
 
         <h5>Temp: ${weatherObj.main.temp}&deg;F</h5>
-        <h6>Feels Like: ${weatherObj.main.feels_like}&deg;F</h6>
         <h6>Humidity: ${weatherObj.main.humidity}%</h6>
         <h6>Wind Speed: ${weatherObj.wind.speed}mph</h6>
         </div>`;
@@ -159,16 +153,4 @@ function getForecast(lat, lon) {
 }
 
 
-
-
 searchBtn.addEventListener('click', outputWeather);
-
-// $('#history-list').on('click', '.history', function (event) {
-//     // event.preventDefault();
-//     const citynput = event.target.textContent;
-//     console.log(cityInput);
-
-//     outputWeather(cityInput.value);
-// });
-
-
