@@ -5,6 +5,16 @@ const searchBtn = document.querySelector('#searchButton');
 // creay an array to store input values for search history
 const searchHistory = [];
 
+// Get the date
+function getWrittenMonth(month) {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[month];
+}
+
+const currentDate = new Date();
+const day = currentDate.getDate();
+const month = getWrittenMonth(currentDate.getMonth());
+
 
 // Current Forecast
 function outputWeather(event) {
@@ -25,15 +35,6 @@ function outputWeather(event) {
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=imperial`;
 
-    // Get the date
-    function getWrittenMonth(month) {
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return months[month];
-    }
-
-    const currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = getWrittenMonth(currentDate.getMonth());
 
     // fetch the data
     fetch(url)
@@ -105,7 +106,6 @@ function getForecast(lat, lon) {
 
     const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
-
     fetch(forecastURL)
         .then(function (responseObj) {
             return responseObj.json();
@@ -125,29 +125,40 @@ function getForecast(lat, lon) {
             outputDiv.innerHTML = '';
 
             filtered.forEach(weatherObj => {
+                const dateTimeString = weatherObj.dt_txt;
+                const dateOnly = dateTimeString.substring(5, 10);
+                console.log(dateOnly);
+
+                const date = dayjs(weatherObj.dt_txt);
+                const dayOfWeek = date.format('dddd');
+                console.log(dayOfWeek);
 
                 const html = `<div class="cell">
-        <p>date</p>
+        <p class="has-text-centered">${dayOfWeek}</p>
 
         <img src="https://openweathermap.org/img/wn/${weatherObj.weather[0].icon}@2x.png" alt="weather icon">
 
+        <p class="has-text-centered">${dateOnly}</p>
+
         <hr>
 
-        <h5>Temperature: ${weatherObj.main.temp}&deg;F</h5>
+        <h5>Temp: ${weatherObj.main.temp}&deg;F</h5>
         <h6>Feels Like: ${weatherObj.main.feels_like}&deg;F</h6>
         <h6>Humidity: ${weatherObj.main.humidity}%</h6>
         <h6>Wind Speed: ${weatherObj.wind.speed}mph</h6>
         </div>`;
 
                 outputDiv.innerHTML += html;
-
             });
+
         })
 
         .catch(function (error) {
             console.log(error);
         });
 }
+
+
 
 
 searchBtn.addEventListener('click', outputWeather);
